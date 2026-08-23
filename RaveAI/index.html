@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RaveAI | Intelligent workspace</title>
+  <meta name="description" content="RaveAI intelligent workspace for chat, research, files, images and productivity." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="layout-fix.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span class="brand-mark">R</span><span>Rave<span class="brand-accent">AI</span></span></div>
+      <button class="new-chat-btn" id="newChatBtn"><span>+</span> New chat</button>
+      <div class="sidebar-label">Workspace</div>
+      <nav class="side-nav">
+        <button class="side-nav-item active" data-view="chat"><span>◈</span> Chat <kbd>⌘ 1</kbd></button>
+        <button class="side-nav-item" data-view="search"><span>⌕</span> Web search <em>NEW</em></button>
+        <button class="side-nav-item" data-view="images"><span>◒</span> Image studio</button>
+        <button class="side-nav-item" data-view="files"><span>□</span> File analyst</button>
+      </nav>
+      <div class="sidebar-label history-label">Recent chats <button id="clearChatsBtn" title="Hapus semua chat">•••</button></div>
+      <div class="chat-history" id="chatHistory"></div>
+      <div class="sidebar-spacer"></div>
+      <div class="upgrade-card"><span class="upgrade-icon">✦</span><strong>Unlock RaveAI Pro</strong><p>Longer context, advanced models and image generation.</p><button id="upgradeBtn">Explore plans <span>→</span></button></div>
+      <div class="sidebar-footer">
+        <button class="side-nav-item" data-view="settings"><span>⚙</span> Settings</button>
+        <button class="profile-mini" id="profileBtn"><span class="avatar">AR</span><span><strong>Alex Rave</strong><small>Free workspace</small></span><span class="more">•••</span></button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenuBtn">☰</button>
+        <div class="context-title"><span class="status-dot"></span><span id="pageTitle">RaveAI Chat</span><span class="beta-pill">BETA</span></div>
+        <div class="top-actions"><button class="icon-btn" id="themeBtn" title="Ganti tema">☼</button><button class="icon-btn" id="shareBtn" title="Bagikan chat">↗</button><button class="top-avatar">AR</button></div>
+      </header>
+
+      <section class="view active" id="chatView">
+        <div class="chat-scroll" id="chatScroll">
+          <div class="welcome-block" id="welcomeBlock">
+            <div class="welcome-orbit"><span>✦</span></div>
+            <p class="eyebrow">YOUR INTELLIGENT WORKSPACE</p>
+            <h1>What can I help you<br /><span>create today?</span></h1>
+            <p class="welcome-copy">Ask anything, explore ideas, or get work done with an AI that thinks alongside you.</p>
+            <div class="suggestion-grid">
+              <button data-prompt="Jelaskan cara kerja machine learning untuk pemula"><span class="suggestion-icon cyan">⌁</span><span><strong>Learn something</strong><small>Explain a complex topic simply</small></span><b>↗</b></button>
+              <button data-prompt="Buatkan ide campaign kreatif untuk brand fashion lokal"><span class="suggestion-icon orange">✧</span><span><strong>Brainstorm ideas</strong><small>Turn a spark into a plan</small></span><b>↗</b></button>
+              <button data-prompt="Review kode JavaScript berikut dan cari bug yang mungkin terjadi"><span class="suggestion-icon purple">{ }</span><span><strong>Write & code</strong><small>Build, debug, and refine</small></span><b>↗</b></button>
+              <button data-prompt="Cari berita teknologi terbaru hari ini dan rangkum sumbernya"><span class="suggestion-icon green">⌕</span><span><strong>Research the web</strong><small>Find answers with sources</small></span><b>↗</b></button>
+            </div>
+          </div>
+          <div class="messages" id="messages"></div>
+        </div>
+        <div class="composer-wrap">
+          <div class="mode-bar"><span class="mode-label">Mode</span><div class="mode-switcher" id="modeSwitcher"><button class="mode active" data-mode="Fast">⚡ Fast</button><button class="mode" data-mode="Deep">◉ Deep</button><button class="mode" data-mode="Academic">⌘ Academic</button><button class="mode" data-mode="News">⌕ News</button></div><span class="memory-status" id="memoryStatus">● Memory on</span></div>
+          <form class="composer" id="chatForm"><textarea id="promptInput" rows="1" placeholder="Message RaveAI..." autocomplete="off"></textarea><div class="composer-tools"><div><button type="button" class="tool-btn" id="attachBtn" title="Upload file">＋</button><button type="button" class="tool-btn" id="voiceBtn" title="Voice input">♩</button><input type="file" id="fileInput" hidden multiple accept=".pdf,.docx,.xlsx,.pptx,.txt,.csv,.json,image/*" /></div><div class="composer-right"><span class="shortcut">Enter to send</span><button class="send-btn" id="sendBtn" type="submit">↑</button></div></div></form>
+          <div class="file-preview" id="filePreview"></div><p class="disclaimer">RaveAI can make mistakes. Check important information.</p>
+        </div>
+      </section>
+
+      <section class="view tool-view" id="searchView"><div class="tool-heading"><p class="eyebrow">LIVE INTELLIGENCE</p><h2>Search the web<br /><span>with context.</span></h2><p>Get current answers with transparent sources and useful summaries.</p></div><div class="search-panel"><div class="large-search"><span>⌕</span><input id="webSearchInput" placeholder="Search anything on the web..." /><button id="webSearchBtn">Search</button></div><div class="search-modes"><button class="active">Fast search</button><button>Deep search</button><button>Academic</button><button>News</button></div></div><div class="search-results" id="searchResults"><div class="empty-tool"><span>⌕</span><h3>Ready when you are</h3><p>Try searching for a current topic, source, or question.</p></div></div></section>
+
+      <section class="view tool-view" id="imagesView"><div class="tool-heading"><p class="eyebrow">CREATIVE LAB</p><h2>Turn words into<br /><span>visuals.</span></h2><p>Shape a prompt, choose a style, and build your visual direction.</p></div><div class="image-studio"><div class="image-controls"><label>Describe your image<textarea id="imagePrompt" placeholder="A cinematic city at blue hour, glowing signs, rain reflections..." rows="5"></textarea></label><div class="control-row"><label>Style<select id="imageStyle"><option>Realistic</option><option>Anime</option><option>Cyberpunk</option><option>3D Render</option><option>Pixel Art</option></select></label><label>Ratio<select><option>1:1 Square</option><option>16:9 Landscape</option><option>9:16 Portrait</option></select></label></div><button class="generate-btn" id="generateImageBtn">✦ Generate image</button></div><div class="image-canvas" id="imageCanvas"><div class="canvas-placeholder"><span>✦</span><p>Your creation will appear here</p><small>Powered by RaveAI Image Studio</small></div></div></div></section>
+
+      <section class="view tool-view" id="filesView"><div class="tool-heading"><p class="eyebrow">KNOWLEDGE DESK</p><h2>Your files,<br /><span>made useful.</span></h2><p>Upload documents and ask questions about the information inside.</p></div><div class="drop-zone" id="dropZone"><div class="drop-icon">↥</div><h3>Drop files here</h3><p>or click to browse · PDF, DOCX, XLSX, PPTX, TXT, CSV, JSON</p><button id="browseFilesBtn">Choose files</button></div><div class="file-list" id="fileList"></div></section>
+
+      <section class="view tool-view settings-view" id="settingsView"><div class="tool-heading"><p class="eyebrow">WORKSPACE CONTROL</p><h2>Make RaveAI<br /><span>feel like yours.</span></h2></div><div class="settings-grid"><div class="settings-card"><div><strong>Memory</strong><p>Let RaveAI remember useful preferences between chats.</p></div><label class="toggle"><input type="checkbox" id="memoryToggle" checked /><span></span></label></div><div class="settings-card"><div><strong>Appearance</strong><p>Switch between a focused dark workspace and light mode.</p></div><button class="setting-action" id="settingsThemeBtn">Dark mode</button></div><div class="settings-card"><div><strong>Language</strong><p>Choose the language RaveAI uses for responses.</p></div><select class="setting-select"><option>Bahasa Indonesia</option><option>English</option></select></div><div class="settings-card admin-card"><div><strong>Admin overview</strong><p>Usage, active users, files, and system health.</p></div><button class="setting-action" id="adminBtn">Open dashboard →</button></div></div></section>
+    </main>
+  </div>
+  <div class="toast" id="toast"></div><div class="modal-backdrop hidden" id="modalBackdrop"><div class="modal" id="modalContent"></div></div>
+  <script src="script.js"></script>
+  <script src="live-chat.js"></script>
+  <script src="file-reader.js"></script>
+</body>
+</html>
